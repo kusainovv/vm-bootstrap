@@ -52,4 +52,15 @@ else
     echo "Docker is already installed."
 fi
 
+# 8. Install Nginx
+echo "Installing Nginx..."
+if ! command -v nginx &> /dev/null; then
+    sudo apt install -y nginx
+    sudo systemctl start nginx
+    sudo systemctl enable nginx
+else
+    echo "Nginx is already installed."
+fi
+
+
 echo "Everything is working, lesss get it broski..."
