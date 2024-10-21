@@ -38,7 +38,7 @@ read -p "Press [Enter] once you've added the SSH key to GitHub."
 echo "Testing GitHub connection..."
 ssh -T git@github.com
 
-# 7. Docker Setup and Deployment
+# 6. Docker Setup and Deployment
 echo "Setting up Docker..."
 
 # Install Docker if not installed
@@ -52,12 +52,15 @@ else
     echo "Docker is already installed."
 fi
 
-# 8. Install Nginx
-echo "Installing Nginx..."
+# 7. Install Nginx
+echo "Installing Nginx and required tools..."
 if ! command -v nginx &> /dev/null; then
-    sudo apt install -y nginx
+    sudo apt install -y nginx curl openssl  # Add any other required tools here
     sudo systemctl start nginx
     sudo systemctl enable nginx
+    # Install Certbot for SSL certificates
+    echo "Installing Certbot for SSL management..."
+    sudo apt install -y certbot python3-certbot-nginx
 else
     echo "Nginx is already installed."
 fi
