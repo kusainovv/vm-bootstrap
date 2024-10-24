@@ -1,7 +1,150 @@
-Before run a sh, execut ``` chmod +x deploy.sh ```
+# 0. Before go to setup
+1. Initialize a Dockerfile for your application.
+2. If you need to deploy a multiple services for your application, the best practice is to create a *<name>-infrastructure* repository with the ```docker-compose.yml``` file for bulding images, running containers fron single repository.
+<br />
+<br />
+<br />
 
-The shel script for initialization and installation base tools for VM.
+# 1. Rent a VM
 
-1. git 
-2. Docker
-3. nginx (certbot)
+At first, u need to rent a VPS, VDS or something else. 
+<br />
+<br />
+<br />
+# 2. Connect By SSH
+
+Install next extensions: [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh), [Remote - SSH: Editing Configuration Files](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh-edit), [Remote Explorer](https://marketplace.visualstudio.com/items?itemName=ms-vscode.remote-explorer).
+
+Configure your SSH client and connect to VM, but take a note that connecting with VS Code (or similar code editors) takes about ~1gb for installing a .vscode folder.
+<br />
+<br />
+<br />
+# 3. Setup base environment for VM
+In this repository, u can see a ``` deploy.sh ```, this is my own shell script and there's not magic, just a little research and a couple of prompts.
+<br />
+There's a ``` deploy.sh ``` algorithm, so u can remove a part of algorithm if u don't need to install something from list.
+
+```mermaid
+graph TD;
+    A1[Install Git] --> A2[Set Git Credentials];
+    A2 --> A3[Generate SSH Key];
+    A3 --> A4[Add SSH Key to GitHub];
+    A4 --> A5[Test GitHub Connection];
+    A5 --> B1[Install Docker and Docker Compose];
+    B1 --> B2[Install Nginx & Certbot];
+    B2 --> B3[Everything is set up];
+```
+## How to install a base environment for VM?
+
+1. Connect to VM.
+2. Create a ``` deploy.sh ``` file in root directory, copy my code and paste it in your file or just copy/paste your file.
+3. In the same directory where your file open a Terminal and execute ```sh chmod +x deploy.sh ``` for making your script executable.
+4. Run in Terminal ```sh ./deploy.sh ```.
+5. Follow the instructions that u will see in Terminal.
+6. Keep hacking.
+<br />
+<br />
+<br />
+
+# 4. Fork your repositories in VM.
+Fork your private or public repository in VM and don't touch them.
+<br />
+<br />
+<br />
+
+# 5. Set a Github Action
+
+In your repositories, u need to set up a ``` Publish Docker Container By GitHub Actions ``` github action, this action adds your build artifact in "Packages" tab and publish your image to ghcr.io.
+<br />
+<br />
+<br />
+
+# 6. Run a Github Action
+
+When u trigger a Github Action u will see a build artifact in "Packages".
+
+<img width="1251" alt="image" src="https://github.com/user-attachments/assets/b793c4b7-1883-4189-b0bf-d2808e877d07">
+<br />
+<br />
+Look at right sidebar, click at build artifact in "Packages" tab.
+
+<br />
+<br />
+<br />
+
+# 7. Migrate from local registry to ghcr.io registry
+![image](https://github.com/user-attachments/assets/d97e9eaf-e99d-4899-956e-598e41231fc2)
+<br />
+<br />
+<br />
+So if you complete everything previous u need to copy the ```sh ghcr.io/kusainovv/vylo.frontend ``` line and instead of support a latest digest, let's add a ```sh :latest``` keyword.
+<br />
+<br />
+After we upload images to ghcr.io, we can change a docker-compose.yml file:
+
+```docker
+
+version: "3.8"
+
+services:
+  frontend:
+    image: "ghcr.io/kusainovv/vylo.frontend:latest"
+    container_name: "rt-frontend"
+    restart: always
+    ports:
+      - 3000:3000
+
+```
+
+At this moment, let's switch to domain and ssl certificates.
+<br />
+<br />
+<br />
+# 8. Domen
+1. Buy a domen
+2. Handshake a "A" DNS record and your ip
+<br />
+<br />
+<br />
+
+# 9. Nginx
+
+In ```sh deploy.sh ``` we already install a nginx, so now we need to configure our server domain.
+
+1. Go to ``` /etc/nginx/sites-available ```
+2. Create a new file with the name is a your domain, e.g. google.com, wihout extensions.
+3. Pase a code in your file
+
+```
+server {
+    server_name google.com;
+
+    location / {
+        proxy_pass http://localhost:3000;  # Forward requests to an application running on port 3000
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+4. Then, create a symbolic link in ``` sites-enabled ``` folder, run:
+
+   ```sh sudo ln -s /etc/nginx/sites-available/google.com /etc/nginx/sites-enabled/ ```
+5. ```sh sudo nginx -t ``` - Check a nginx status
+6. ``` sudo systemctl reload nginx ``` - Reload a nginx
+
+# 9. SSL
+
+```sh sudo certbot --nginx```
+
+1. Enter your email address.
+2. Agree to the terms of service.
+3. Select the domain you want to secure (Certbot automatically detects Nginx domains)
+
+# 10. Manual Github Action
+
+# 10. Deploy it!
+
+1. Go to your repositories and run a Github Action Docker
+2. Go to your infrastructure repository and run a 
