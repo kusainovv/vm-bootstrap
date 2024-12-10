@@ -1,28 +1,35 @@
-# 0. Before go to setup
-1. Initialize a Dockerfile for your application.
-2. If you need to deploy a multiple services for your application, the best practice is to create a *<name>-infrastructure* repository with the ```docker-compose.yml``` file for bulding images, running containers fron single repository.
+# 0. The Requirements
+1. Make sure your application's Dockerfile is properly configured and works as expected in production mode.
+2. Create an ```infra-as-code``` repository and include a ```docker-compose.yml``` file to establish multi-container setup. 
 <br />
 <br />
 <br />
 
 # 1. Rent a VM
+1. Rent a virtual machine or host your own server to proceed with next steps.
+<br />
+<br />
 
-At first, u need to rent a VPS, VDS or something else. 
-<br />
-<br />
-<br />
 # 2. Connect By SSH
 
-Install next extensions: [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh), [Remote - SSH: Editing Configuration Files](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh-edit), [Remote Explorer](https://marketplace.visualstudio.com/items?itemName=ms-vscode.remote-explorer).
+Install the following extensions: [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh), [Remote - SSH: Editing Configuration Files](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh-edit), [Remote Explorer](https://marketplace.visualstudio.com/items?itemName=ms-vscode.remote-explorer).
 
-Configure your SSH client and connect to VM, but take a note that connecting with VS Code (or similar code editors) takes about ~1gb for installing a .vscode folder.
+1. Configure the SSH extension to connect to the VM using it.
+2. Connect to your VM by this extension.
+<br />
+
+> [!IMPORTANT]
+> The connecting via Vs Code will take approximately 1 GB to install the ```.vscode``` folder and this process cannot be avoided.
 <br />
 <br />
-<br />
-# 3. Setup base environment for VM
-In this repository, u can see a ``` deploy.sh ```, this is my own shell script and there's not magic, just a little research and a couple of prompts.
-<br />
-There's a ``` deploy.sh ``` algorithm, so u can remove a part of algorithm if u don't need to install something from list.
+
+# 3. Setup up a base environment for VM
+
+Clone my own [bash script](https://github.com/kusainovv/vm-bootstrap/blob/main/deploy.sh) to be ready to implement the next steps on your VM.
+
+---
+
+### Here're the steps that this bash script performs.
 
 ```mermaid
 graph TD;
@@ -34,14 +41,18 @@ graph TD;
     B1 --> B2[Install Nginx & Certbot];
     B2 --> B3[Everything is set up];
 ```
-## How to install a base environment for VM?
 
-1. Connect to VM.
-2. Create a ``` deploy.sh ``` file in root directory, copy my code and paste it in your file or just copy/paste your file.
-3. In the same directory where your file open a Terminal and execute ```sh chmod +x deploy.sh ``` for making your script executable.
-4. Run in Terminal ```sh ./deploy.sh ```.
-5. Follow the instructions that u will see in Terminal.
-6. Keep hacking.
+---
+TODO: Fix it
+---
+
+## Get ready to install a base environment for your VM.
+
+1. Create a ``` deploy.sh ``` file in root directory, copy my code and paste it in your file or just copy/paste your file.
+2. In the same directory where your file open a Terminal and execute ```sh chmod +x deploy.sh ``` for making your script executable.
+3. Run in Terminal ```sh ./deploy.sh ```.
+4. Follow the instructions that u will see in Terminal.
+5. Keep hacking.
 <br />
 <br />
 <br />
@@ -141,10 +152,10 @@ server {
 1. Enter your email address.
 2. Agree to the terms of service.
 3. Select the domain you want to secure (Certbot automatically detects Nginx domains)
+<br />
+<br />
+<br />
 
-# 10. Manual Github Action
+# 10/11/12. 
 
-# 10. Deploy it!
-
-1. Go to your repositories and run a Github Action Docker
-2. Go to your infrastructure repository and run a 
+The next features in writing phase, keep waiting.
