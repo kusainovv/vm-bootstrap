@@ -42,10 +42,6 @@ graph TD;
     B2 --> B3[Everything is set up];
 ```
 
----
-TODO: Fix it
----
-
 ## Get ready to install a base environment for your VM.
 
 1. Create a ``` deploy.sh ``` file in root directory, copy my code and paste it in your file or just copy/paste your file.
