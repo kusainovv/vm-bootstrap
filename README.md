@@ -157,7 +157,3 @@ server {
 <br />
 <br />
 <br />
-
-# 10/11/12. 
-
-The next features in writing phase, keep waiting.
