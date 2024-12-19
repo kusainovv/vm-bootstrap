@@ -1,22 +1,23 @@
+# This repository is in development phase
 > [!WARNING]
-> The guide below in development status, I research best practices for initializing a VM setup.
+> This repository is in development phase, I continue to research best practices for initializing the base VM environment.
 <br />
 <br />
 <br />
 
-# 0. The Requirements
+## 0. The Requirements
 1. Make sure your application's Dockerfile is properly configured and works as expected in production mode.
 2. Create an ```infra-as-code``` repository and include a ```docker-compose.yml``` file to establish multi-container setup. 
 <br />
 <br />
 <br />
 
-# 1. Rent a VM
+## 1. Rent a VM
 1. Rent a virtual machine or host your own server to proceed with next steps.
 <br />
 <br />
 
-# 2. Connect By SSH
+## 2. Connect By SSH
 
 Install the following extensions: [Remote - SSH](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh), [Remote - SSH: Editing Configuration Files](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-ssh-edit), [Remote Explorer](https://marketplace.visualstudio.com/items?itemName=ms-vscode.remote-explorer).
 
@@ -29,7 +30,7 @@ Install the following extensions: [Remote - SSH](https://marketplace.visualstudi
 <br />
 <br />
 
-# 3. Setup up a base environment for VM
+## 3. Setup up a base environment for VM
 
 Clone my own [bash script](https://github.com/kusainovv/vm-bootstrap/blob/main/deploy.sh) to be ready to implement the next steps on your VM.
 
@@ -59,20 +60,20 @@ graph TD;
 <br />
 <br />
 
-# 4. Fork your repositories in VM.
+## 4. Fork your repositories in VM.
 Fork your private or public repository in VM and don't touch them.
 <br />
 <br />
 <br />
 
-# 5. Set a Github Action
+## 5. Set a Github Action
 
 In your repositories, u need to set up a ``` Publish Docker Container By GitHub Actions ``` github action, this action adds your build artifact in "Packages" tab and publish your image to ghcr.io.
 <br />
 <br />
 <br />
 
-# 6. Run a Github Action
+## 6. Run a Github Action
 
 When u trigger a Github Action u will see a build artifact in "Packages".
 
@@ -85,7 +86,7 @@ Look at right sidebar, click at build artifact in "Packages" tab.
 <br />
 <br />
 
-# 7. Migrate from local registry to ghcr.io registry
+## 7. Migrate from local registry to ghcr.io registry
 ![image](https://github.com/user-attachments/assets/d97e9eaf-e99d-4899-956e-598e41231fc2)
 <br />
 <br />
@@ -113,14 +114,14 @@ At this moment, let's switch to domain and ssl certificates.
 <br />
 <br />
 <br />
-# 8. Domen
+## 8. Domen
 1. Buy a domen
 2. Handshake a "A" DNS record and your ip
 <br />
 <br />
 <br />
 
-# 9. Nginx
+## 9. Nginx
 
 In ```sh deploy.sh ``` we already install a nginx, so now we need to configure our server domain.
 
@@ -147,7 +148,7 @@ server {
 5. ```sh sudo nginx -t ``` - Check a nginx status
 6. ``` sudo systemctl reload nginx ``` - Reload a nginx
 
-# 9. SSL
+## 9. SSL
 
 ```sh sudo certbot --nginx```
 
