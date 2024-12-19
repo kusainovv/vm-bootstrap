@@ -1,3 +1,9 @@
+> [!WARNING]
+> The guide below in development status, I research best practices for initializing a VM setup.
+<br />
+<br />
+<br />
+
 # 0. The Requirements
 1. Make sure your application's Dockerfile is properly configured and works as expected in production mode.
 2. Create an ```infra-as-code``` repository and include a ```docker-compose.yml``` file to establish multi-container setup. 
