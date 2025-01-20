@@ -51,8 +51,8 @@ graph TD;
 
 ## Get ready to install a base environment for your VM.
 
-1. Create a ``` deploy.sh ``` file in root directory, copy my code and paste it in your file or just copy/paste your file.
-2. In the same directory where your file open a Terminal and execute ```sh chmod +x deploy.sh ``` for making your script executable.
+1. Create a ``` deploy.sh ``` file in root directory, copy my code and paste it in your file or just copy/paste your file. 
+2. In the same directory where your file open a Terminal and execute ```sh chmod +x deploy.sh ``` or ```chmod +x deploy.sh``` for making your script executable.
 3. Run in Terminal ```sh ./deploy.sh ```.
 4. Follow the instructions that u will see in Terminal.
 5. Keep hacking.
