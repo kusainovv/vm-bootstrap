@@ -109,6 +109,15 @@ services:
       - 3000:3000
 
 ```
+<br />
+<br />
+If u have any problems with docker-compose syntax u need to intall a Docker Compose
+
+```docker
+sudo curl -L "https://github.com/docker/compose/releases/download/v2.29.2/docker-compose-$(uname -s)-$(uname -m)"  -o /usr/local/bin/docker-compose
+sudo mv /usr/local/bin/docker-compose /usr/bin/docker-compose
+sudo chmod +x /usr/bin/docker-compose      
+```
 
 At this moment, let's switch to domain and ssl certificates.
 <br />
