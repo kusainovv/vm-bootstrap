@@ -1,9 +1,4 @@
-# This repository is in development phase
-> [!WARNING]
-> This repository is in development phase, I continue to research best practices for initializing the base VM environment.
-<br />
-<br />
-<br />
+
 
 ## 0. The Requirements
 1. Make sure your application's Dockerfile is properly configured and works as expected in production mode.
