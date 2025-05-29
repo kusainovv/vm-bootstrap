@@ -1,9 +1,6 @@
-
-
 ## 0. The Requirements
 1. Make sure your application's Dockerfile is properly configured and works as expected in production mode.
 2. Create an ```infra-as-code``` repository and include a ```docker-compose.yml``` file to establish multi-container setup. 
-<br />
 <br />
 <br />
 
